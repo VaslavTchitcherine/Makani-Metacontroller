@@ -1,0 +1,32 @@
+
+Code to retrieve the commands (gcc and ar) needed to build
+specific .so dynamic libraries, as required by the Makani motor_client.py code.
+These were needed to port motor_client.py to the pi, as it is
+infeasible to build the entire codebase with bazel on a pi.
+
+On a machine with the Makani git source, edit the last line in lib/scripts/developer/bbuild_x86 
+	bazel -s build ${TARGETS} "$@"
+Adding the -s flag for verbose output.
+Then capture the verbose output of the build to /tmp/typescript
+Note that some generated files (e.g. avionics/network/aio_node.h) are in bazel cache
+files wich vanish on reboot (?), so the build will have to have been run for them to be found.
+
+For each library we need for motor_client.py, extract build commands from the bazel output typescript, example:
+	debazel.pl _aio_node.so
+
+This parses the verbose output of the bazel build from /tmp/typescript.
+It first finds the gcc command that links the dynamic library.
+Then, the ar command producing the archive from the .o file(s) is located.
+Next, the gcc command to compile each .c to .o is located.
+Source files are scp'ed from the makani machine into appropriate subdirs, which
+are created as necessary.  Finally, the function getincludes() is called for each .c file
+to recursively scp any relative include files.  As for the other files, these
+are scped to the same subdirs as in the bazel build.
+A dbm database /tmp/processed.db retains state across invocation of debazel.pl
+for different libraries, to avoid copying and processing any files more than once.
+
+The output of debazel.pl can then be executed to build the .so file on any desired platform,
+without the immense overhead of bazel.  Provided the other dependencies such as gsl are installed.
+
+The debazel_all.pl script executes debazel.pl for all the dynamic libs needed by motor_client.
+Commands needed to build each are left in the subdir buildcmds.

@@ -1,0 +1,13 @@
+#!/bin/bash
+set -x
+  /usr/bin/gcc -Wall -Wextra -Wcast-align -Wcast-qual -Wdisabled-optimization -Winvalid-pch -Wmissing-format-attribute -Wredundant-decls -Wshadow -Wstack-protector -Wswitch-default -Wundef -Wunknown-pragmas -Wwrite-strings -pedantic-errors -Wconversion '-Wformat=2' -Wswitch-enum -MMD -Wlogical-op -O2 -g0 -DNDEBUG -Wno-unused-parameter -Wno-unused-variable -MD -MF bazel-out/host/bin/avionics/common/_objs/pack_aio_header/pack_aio_header.pic.d '-frandom-seed=bazel-out/host/bin/avionics/common/_objs/pack_aio_header/pack_aio_header.pic.o' -fPIC -iquote . -iquote bazel-out/host/bin -g0 '-std=c99' -Wmissing-prototypes -Wnested-externs -Wstrict-prototypes -Wno-unused-function -c bazel-out/host/bin/avionics/common/pack_aio_header.c -o bazel-out/host/bin/avionics/common/_objs/pack_aio_header/pack_aio_header.pic.o
+
+  /usr/bin/ar rcsD bazel-out/host/bin/avionics/common/libpack_aio_header.pic.a bazel-out/host/bin/avionics/common/_objs/pack_aio_header/pack_aio_header.pic.o
+
+  /usr/bin/gcc -Wall -Wextra -Wcast-align -Wcast-qual -Wdisabled-optimization -Winvalid-pch -Wmissing-format-attribute -Wredundant-decls -Wshadow -Wstack-protector -Wswitch-default -Wundef -Wunknown-pragmas -Wwrite-strings -pedantic-errors -Wconversion '-Wformat=2' -Wswitch-enum -MMD -Wlogical-op -O2 -g0 -DNDEBUG -Wno-unused-parameter -Wno-unused-variable -MD -MF bazel-out/host/bin/avionics/common/_objs/aio_header/aio_header.pic.d '-frandom-seed=bazel-out/host/bin/avionics/common/_objs/aio_header/aio_header.pic.o' -fPIC -iquote . -iquote bazel-out/host/bin -g0 '-std=c99' -Wmissing-prototypes -Wnested-externs -Wstrict-prototypes -c avionics/common/aio_header.c -o bazel-out/host/bin/avionics/common/_objs/aio_header/aio_header.pic.o
+
+  /usr/bin/ar rcsD bazel-out/host/bin/avionics/common/libaio_header.pic.a bazel-out/host/bin/avionics/common/_objs/aio_header/aio_header.pic.o
+
+  /usr/bin/gcc -shared -o bazel-out/host/bin/avionics/common/_pack_aio_header.so -Wl,-whole-archive bazel-out/host/bin/avionics/common/libpack_aio_header.pic.a -Wl,-no-whole-archive -Wl,-whole-archive bazel-out/host/bin/avionics/common/libaio_header.pic.a -Wl,-no-whole-archive -Wl,-S -lm -B/usr/bin/ -lstdc++
+
+cp bazel-out/host/bin/avionics/common/_pack_aio_header.so lib

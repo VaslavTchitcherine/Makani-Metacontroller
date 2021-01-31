@@ -1,0 +1,3 @@
+
+Eagle PCB design files for single channel 16 bit a/d coverter Raspberry Pi hat.
+Used to read analog signal from Prius accelerator pedal in script throttle.py

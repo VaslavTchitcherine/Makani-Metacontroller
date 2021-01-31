@@ -1,0 +1,4 @@
+
+Commands saved from the output of motor_client.py, when dump=1 in aio.py.
+
+Can be replayed with the script replay.py

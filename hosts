@@ -1,0 +1,21 @@
+# hosts file for the motors
+# This info is from network.yaml
+
+192.168.1.11	motor_sbo
+192.168.1.12	motor_sbi
+192.168.1.13	motor_pbi
+192.168.1.14	motor_pbo
+192.168.1.15	motor_pto
+192.168.1.16	motor_pti
+192.168.1.17	motor_sti
+192.168.1.18	motor_sto
+
+192.168.1.55    dyno_motor_sbo
+192.168.1.56    dyno_motor_sbi
+192.168.1.57    dyno_motor_pbi
+192.168.1.58    dyno_motor_pbo
+192.168.1.59    dyno_motor_pto
+192.168.1.60    dyno_motor_pti
+192.168.1.61    dyno_motor_sti
+192.168.1.62    dyno_motor_sto
+

@@ -1,0 +1,13 @@
+#!/bin/bash
+set -x
+  /usr/bin/gcc -Wall -Wextra -Wcast-align -Wcast-qual -Wdisabled-optimization -Winvalid-pch -Wmissing-format-attribute -Wredundant-decls -Wshadow -Wstack-protector -Wswitch-default -Wundef -Wunknown-pragmas -Wwrite-strings -pedantic-errors -Wconversion '-Wformat=2' -Wswitch-enum -MMD -Wlogical-op -O2 -g0 -DNDEBUG -Wno-unused-parameter -Wno-unused-variable -MD -MF bazel-out/host/bin/avionics/network/_objs/aio_labels/aio_labels.pic.d '-frandom-seed=bazel-out/host/bin/avionics/network/_objs/aio_labels/aio_labels.pic.o' -fPIC -iquote . -iquote bazel-out/host/bin -g0 '-std=c99' -Wmissing-prototypes -Wnested-externs -Wstrict-prototypes -c bazel-out/host/bin/avionics/network/aio_labels.c -o bazel-out/host/bin/avionics/network/_objs/aio_labels/aio_labels.pic.o
+
+  /usr/bin/ar rcsD bazel-out/host/bin/avionics/network/libaio_labels.pic.a bazel-out/host/bin/avionics/network/_objs/aio_labels/aio_labels.pic.o
+
+  /usr/bin/gcc -Wall -Wextra -Wcast-align -Wcast-qual -Wdisabled-optimization -Winvalid-pch -Wmissing-format-attribute -Wredundant-decls -Wshadow -Wstack-protector -Wswitch-default -Wundef -Wunknown-pragmas -Wwrite-strings -pedantic-errors -Wconversion '-Wformat=2' -Wswitch-enum -MMD -Wlogical-op -O2 -g0 -DNDEBUG -Wno-unused-parameter -Wno-unused-variable -MD -MF bazel-out/host/bin/avionics/network/_objs/aio_node/aio_node.pic.d '-frandom-seed=bazel-out/host/bin/avionics/network/_objs/aio_node/aio_node.pic.o' -fPIC -iquote . -iquote bazel-out/host/bin -g0 '-std=c99' -Wmissing-prototypes -Wnested-externs -Wstrict-prototypes -c bazel-out/host/bin/avionics/network/aio_node.c -o bazel-out/host/bin/avionics/network/_objs/aio_node/aio_node.pic.o
+
+  /usr/bin/ar rcsD bazel-out/host/bin/avionics/network/libaio_node.pic.a bazel-out/host/bin/avionics/network/_objs/aio_node/aio_node.pic.o
+
+  /usr/bin/gcc -shared -o bazel-out/host/bin/avionics/network/_aio_labels.so -Wl,-whole-archive bazel-out/host/bin/avionics/network/libaio_labels.pic.a -Wl,-no-whole-archive -Wl,-whole-archive bazel-out/host/bin/avionics/network/libaio_node.pic.a -Wl,-no-whole-archive -Wl,-S -lm -B/usr/bin/ -lstdc++
+
+cp bazel-out/host/bin/avionics/network/_aio_labels.so lib

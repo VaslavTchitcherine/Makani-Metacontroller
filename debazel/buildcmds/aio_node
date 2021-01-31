@@ -1,0 +1,9 @@
+#!/bin/bash
+set -x
+  /usr/bin/gcc -Wall -Wextra -Wcast-align -Wcast-qual -Wdisabled-optimization -Winvalid-pch -Wmissing-format-attribute -Wredundant-decls -Wshadow -Wstack-protector -Wswitch-default -Wundef -Wunknown-pragmas -Wwrite-strings -pedantic-errors -Wconversion '-Wformat=2' -Wswitch-enum -MMD -Wlogical-op -O2 -MD -MF bazel-out/k8-fastbuild/bin/avionics/network/_objs/aio_node/aio_node.pic.d '-frandom-seed=bazel-out/k8-fastbuild/bin/avionics/network/_objs/aio_node/aio_node.pic.o' -fPIC -iquote . -iquote bazel-out/k8-fastbuild/bin '-std=c99' -Wmissing-prototypes -Wnested-externs -Wstrict-prototypes -c bazel-out/k8-fastbuild/bin/avionics/network/aio_node.c -o bazel-out/k8-fastbuild/bin/avionics/network/_objs/aio_node/aio_node.pic.o
+
+  /usr/bin/ar rcsD bazel-out/k8-fastbuild/bin/avionics/network/libaio_node.a bazel-out/k8-fastbuild/bin/avionics/network/_objs/aio_node/aio_node.pic.o
+
+  /usr/bin/gcc -shared -o bazel-out/k8-fastbuild/bin/avionics/network/_aio_node.so -Wl,-whole-archive bazel-out/k8-fastbuild/bin/avionics/network/libaio_node.a -Wl,-no-whole-archive -Wl,-S -lm -B/usr/bin/ -lstdc++
+
+cp bazel-out/k8-fastbuild/bin/avionics/network/_aio_node.so lib
